@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AgGridAngular } from 'ag-grid-angular';
 
 @Component({
   selector: 'app-root',
@@ -7,20 +8,39 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  @ViewChild('agGrid', { static: false })
+  agGrid!: AgGridAngular;
+
   title = 'my-app';
 
   columnDefs = [
-    { headerName: 'Make', field: 'make', sortable:true, filter: true},
-    { headerName: 'Model', field: 'model', sortable:true, filter: true },
-    { headerName: 'Price', field: 'price', sortable:true, filter: true },
+    {
+      headerName: 'Make',
+      field: 'make',
+      sortable: true,
+      filter: true,
+      checkboxSelection: true,
+    },
+    { headerName: 'Model', field: 'model', sortable: true, filter: true },
+    { headerName: 'Price', field: 'price', sortable: true, filter: true },
   ];
 
   rowData: any;
 
+  getSelectedRows() {
+    const selectedNodes = this.agGrid.api.getSelectedNodes();
+    const selectedData = selectedNodes.map((node) => node.data);
+    const selectedDataStringPresentation = selectedData
+      .map((node) => node.make + ' ' + node.model)
+      .join(', ');
+    alert(`Selected Nodes: ${selectedDataStringPresentation}`);
+  }
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.rowData = this.http.get("https://www.ag-grid.com/example-assets/row-data.json");
-    console.log(this.rowData);
+    this.rowData = this.http.get(
+      'https://www.ag-grid.com/example-assets/row-data.json'
+    );
   }
 }
