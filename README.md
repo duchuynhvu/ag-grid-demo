@@ -25,3 +25,14 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Github 
+
+The first thing you should do when you install Git is to set your user name and email address.
+
+Run `git config --list` command to list all the settings Git.
+
+Run `git config --global user.name "John Doe"` to set your user name
+
+Run `git config --global user.email johndoe@example.com` to set your email address
