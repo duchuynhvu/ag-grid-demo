@@ -2,6 +2,6 @@
 <ag-grid-angular
   style="width: 700px; height: 500px;"
   class="ag-theme-balham"
-  [rowData]="rowData"
+  [rowData]="rowData | async"
   [columnDefs]="columnDefs"
 ></ag-grid-angular>
